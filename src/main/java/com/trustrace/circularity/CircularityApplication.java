@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 //@SpringBootApplication
 @SpringBootApplication()
-@OpenAPIDefinition(info = @Info(title = "Circularity API", version = "2.0", description = "Api Information"))
 public class CircularityApplication implements CommandLineRunner {
 	@Autowired
 	UserRepository userRepository;
@@ -35,4 +36,5 @@ public class CircularityApplication implements CommandLineRunner {
 		userRepository.save(user);
 
 	}
+
 }
