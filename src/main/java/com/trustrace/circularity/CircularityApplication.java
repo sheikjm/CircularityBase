@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@SpringBootApplication
 @SpringBootApplication()
 @OpenAPIDefinition(info = @Info(title = "Circularity API", version = "2.0", description = "Api Information"))
-@SecurityScheme(name = "circularity", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class CircularityApplication implements CommandLineRunner {
 	@Autowired
 	UserRepository userRepository;

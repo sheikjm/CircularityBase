@@ -32,18 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
 
-    private static final String[] AUTH_WHITELIST = {
-              "/v2/api-docs",
-            "/swagger-resources",
-            "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
-            "/swagger-ui.html",
-            "/webjars/**",
-            // -- Swagger UI v3 (OpenAPI)
+    private static final String[] SWAGGER_WHITELIST = {
             "/v3/api-docs/**",
-            "/swagger-ui/**"
-
+            "/swagger-ui/**",
+            "/swagger-ui.html",
     };
 
     @Bean
@@ -69,11 +61,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         httpSecurity.cors().and().csrf().disable()
                  .authorizeRequests().antMatchers("/v1/authenticate").permitAll().
-                antMatchers(AUTH_WHITELIST).permitAll()
+                antMatchers(SWAGGER_WHITELIST).permitAll()
                  .anyRequest().authenticated().and().
                            exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-       httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+       httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).httpBasic();
+
+
     }
 
     @Override
